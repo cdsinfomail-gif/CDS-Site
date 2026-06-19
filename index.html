@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chhatra Darpan Samiti</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#F97316", // Saffron orange
+                        "primary-dark": "#EA580C",
+                        "primary-container": "#ff9933",
+                        "on-surface": "#231a13",
+                        "on-surface-variant": "#554336",
+                        "surface-container-low": "#fff1e8",
+                        "surface-container-highest": "#f1dfd3",
+                        "surface-light": "#FFFFFF",
+                        "background-light": "#F8FAFC",
+                        "text-light": "#1E293B",
+                        "muted-light": "#64748B",
+                        "outline-variant": "#dbc2b0",
+                        "inverse-surface": "#392e27",
+                    },
+                    fontFamily: {
+                        "headline-xl": ["Montserrat", "sans-serif"],
+                        "headline-lg": ["Montserrat", "sans-serif"],
+                        "body-md": ["Be Vietnam Pro", "sans-serif"],
+                        "label-caps": ["Montserrat", "sans-serif"],
+                        "body-hindi": ["Be Vietnam Pro", "sans-serif"],
+                        "display": ["Poppins", "Noto Sans Devanagari", "sans-serif"],
+                        "body": ["Poppins", "Noto Sans Devanagari", "sans-serif"],
+                    },
+                    spacing: {
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "section-gap": "80px"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(249, 115, 22, 0.15);
+        }
+        .saffron-gradient {
+            background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+        }
+        .squircle {
+            border-radius: 20% 20% 20% 20% / 20% 20% 20% 20%;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-pattern {
+            background-color: #F8FAFC;
+            background-image: radial-gradient(#F97316 0.5px, transparent 0.5px), radial-gradient(#F97316 0.5px, #F8FAFC 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.8;
+        }
+        /* Hidden elements for GSAP to animate */
+        .gsap-hero-item, .gsap-reveal {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-background-light text-text-light font-body overflow-x-hidden">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-primary/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <img alt="CDS Logo" class="h-12 w-12 rounded-full border-2 border-primary object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvFcGNgByS77xUdc9BaA8Nu0gp164wVA7MYaxO9qNWezJDiqsMgp7aeR_I4dxXMO7nbv-Xej41LAQmUlyInLxuMaahBH82gPnxM93jwgW4W0EpZ8xUF2z0e8snYFmcX4N735uVcCVzSzz4ZsGMBv52xp3J-_aUf8QM9gD_al56Y09Jj93DcISoJ155hgIZlzmx6Ggpg2V4EoznQNzqQxhJ__wdAhu2Uxr_i9RElCg-R7Xsr8KE-5IrNbV3NriOJjc6CIIgNN3LUzU_">
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-xl tracking-tight text-primary">Chhatra Darpan</span>
+                        <span class="text-xs font-medium text-muted-light">Samiti / छात्र दर्पण समिति</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a class="text-text-light hover:text-primary font-medium transition-colors" href="#home">Home</a>
+                    <a class="text-text-light hover:text-primary font-medium transition-colors" href="#about">About Us</a>
+                    <a class="text-text-light hover:text-primary font-medium transition-colors" href="#leadership">Leadership</a>
+                    <a class="text-text-light hover:text-primary font-medium transition-colors" href="#contact">Contact Us</a>
+                </div>
+                <button class="md:hidden text-primary focus:outline-none p-2">
+                    <span class="material-icons text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
+        <div class="absolute inset-0 hero-pattern z-0"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-72 h-72 bg-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <div class="gsap-hero-item inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium mb-6">
+                        <span class="material-icons text-sm">campaign</span>
+                        Youth Empowerment NGO / युवा सशक्तिकरण
+                    </div>
+                    <h1 class="gsap-hero-item font-display text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                        Empowering <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-500">Youth.</span><br>
+                        Building <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-500">Nation.</span>
+                    </h1>
+                    <h2 class="gsap-hero-item font-display text-2xl lg:text-3xl font-bold text-muted-light mb-8 leading-snug">
+                        छात्र दर्पण समिति<br>
+                        <span class="text-lg font-normal">Empowering Students, Transforming Society.</span>
+                    </h2>
+                    <div class="gsap-hero-item flex gap-4 justify-center lg:justify-start">
+                        <a href="#about" class="saffron-gradient text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-primary/30 hover:scale-105 transition-transform">Explore More</a>
+                        <a href="#contact" class="bg-white text-primary border border-primary px-8 py-3 rounded-full font-bold shadow-sm hover:bg-primary/5 transition-colors">Join Us</a>
+                    </div>
+                </div>
+                <div class="gsap-hero-image relative hidden lg:block">
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] glassmorphism rounded-full p-8 shadow-2xl flex items-center justify-center border-4 border-white z-20" style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);">
+                        <img alt="CDS Logo" class="w-full h-full object-contain rounded-full shadow-inner bg-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCps8kSG7QMJ7oZIWBJi0ehSSbViJdUqXd8KQb-fJUDKLdgoHNuRpnUtc0x_rTTL_a0ljwaFE7h9LQsXlbZnH9Ze5KvpAk5tGGdUGPewXJt2KFxnQzJLx4ljIS6Cd2d_4IIfJcqlgldQRxPvWLllEBdH6zPZNOQ091Lysk79t7D_V1OpD-1lnRRebvEIifC7ArWVqhxUzg2DWoWl8BsZXraq1vaNA_zWkkSMhJ53mfR1W1_NyRUkQ02EMteeKvUho1R6JMv6I9NUIFxjxU">
+                    </div>
+                    <div class="absolute top-10 right-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg z-30 animate-bounce" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-green-100 p-2 rounded-full">
+                                <span class="material-icons text-green-600">group</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-800">10K+ Members</p>
+                                <p class="text-xs text-gray-500">युवा शक्ति</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Bento Grid (from About Us) -->
+    <section id="about" class="py-section-gap bg-surface-container-low px-container-padding">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gsap-reveal">
+                <h2 class="font-headline-lg text-4xl font-bold mb-2 text-on-surface">Mission & Vision</h2>
+                <div class="h-1 w-20 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                <!-- Mission -->
+                <div class="gsap-reveal md:col-span-7 glass-card p-10 rounded-xl relative overflow-hidden group bg-white/80">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                    <div class="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary">
+                        <span class="material-symbols-outlined">flag</span>
+                    </div>
+                    <h2 class="font-headline-lg text-2xl font-bold text-primary mb-4">Our Mission / हमारा उद्देश्य</h2>
+                    <p class="text-body-md text-on-surface-variant mb-6 leading-relaxed">
+                        To cultivate a dynamic ecosystem where student leaders are equipped with resources, mentorship, and opportunities to address critical social challenges. We aim to foster a culture of selfless service and intellectual growth among the youth of our nation.
+                    </p>
+                    <p class="font-body-hindi text-body-hindi text-on-surface italic">
+                        छात्रों को संसाधनों, परामर्श और अवसरों से लैस करना ताकि वे महत्वपूर्ण सामाजिक चुनौतियों का समाधान कर सकें।
+                    </p>
+                </div>
+                <!-- Vision -->
+                <div class="gsap-reveal md:col-span-5 saffron-gradient p-10 rounded-xl text-white flex flex-col justify-center shadow-xl">
+                    <div class="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white/20">
+                        <span class="material-symbols-outlined text-white">visibility</span>
+                    </div>
+                    <h2 class="font-headline-lg text-2xl font-bold mb-4">Our Vision / हमारी दृष्टि</h2>
+                    <p class="font-body-md opacity-90 leading-relaxed">
+                        A nation where every student mirrors the values of empathy, integrity, and proactive leadership, contributing to a more equitable and transparent society.
+                    </p>
+                    <p class="font-body-hindi mt-6 opacity-90">
+                        एक ऐसा राष्ट्र जहां हर छात्र सहानुभूति, अखंडता और सक्रिय नेतृत्व के मूल्यों को प्रतिबिंबित करता है।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="py-section-gap px-container-padding max-w-7xl mx-auto">
+        <div class="text-center mb-16 gsap-reveal">
+            <h2 class="font-headline-lg text-4xl font-bold text-on-surface mb-2">Core Values</h2>
+            <div class="h-1 w-20 bg-primary mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Value 1 -->
+            <div class="gsap-reveal glass-card p-8 rounded-xl flex flex-col items-center text-center">
+                <div class="squircle w-20 h-20 saffron-gradient flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-white text-4xl">school</span>
+                </div>
+                <h3 class="font-headline-lg font-bold text-xl text-primary mb-2">Student Support</h3>
+                <p class="font-label-caps text-label-caps text-on-surface-variant mb-4">छात्र सहायता</p>
+                <p class="text-body-md text-on-surface-variant">
+                    Providing academic aid, legal guidance, and moral support to ensure no student feels isolated in their journey.
+                </p>
+            </div>
+            <!-- Value 2 -->
+            <div class="gsap-reveal glass-card p-8 rounded-xl flex flex-col items-center text-center border-t-4 border-primary">
+                <div class="squircle w-20 h-20 saffron-gradient flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-white text-4xl">volunteer_activism</span>
+                </div>
+                <h3 class="font-headline-lg font-bold text-xl text-primary mb-2">Social Work</h3>
+                <p class="font-label-caps text-label-caps text-on-surface-variant mb-4">समाज सेवा</p>
+                <p class="text-body-md text-on-surface-variant">
+                    Actively participating in grass-roots social initiatives, from blood donation drives to community education programs.
+                </p>
+            </div>
+            <!-- Value 3 -->
+            <div class="gsap-reveal glass-card p-8 rounded-xl flex flex-col items-center text-center">
+                <div class="squircle w-20 h-20 saffron-gradient flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-white text-4xl">groups</span>
+                </div>
+                <h3 class="font-headline-lg font-bold text-xl text-primary mb-2">Youth Leadership</h3>
+                <p class="font-label-caps text-label-caps text-on-surface-variant mb-4">युवा नेतृत्व</p>
+                <p class="text-body-md text-on-surface-variant">
+                    Empowering students to take charge of initiatives, developing professional skills through practical responsibilities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-section-gap px-container-padding bg-surface-container-highest">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter text-center">
+                <div class="gsap-reveal p-6">
+                    <span class="block text-4xl font-bold text-primary mb-1">500+</span>
+                    <span class="font-label-caps text-on-surface-variant">MEMBERS / सदस्य</span>
+                </div>
+                <div class="gsap-reveal p-6 border-l md:border-l-0 md:border-x border-outline-variant/30">
+                    <span class="block text-4xl font-bold text-primary mb-1">50+</span>
+                    <span class="font-label-caps text-on-surface-variant">PROJECTS / परियोजनाएं</span>
+                </div>
+                <div class="gsap-reveal p-6 border-l md:border-l-0 md:border-r border-outline-variant/30">
+                    <span class="block text-4xl font-bold text-primary mb-1">10k+</span>
+                    <span class="font-label-caps text-on-surface-variant">LIVES IMPACTED / प्रभाव</span>
+                </div>
+                <div class="gsap-reveal p-6">
+                    <span class="block text-4xl font-bold text-primary mb-1">15+</span>
+                    <span class="font-label-caps text-on-surface-variant">CITIES / शहर</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="py-section-gap px-container-padding max-w-7xl mx-auto">
+        <div class="text-center mb-16 gsap-reveal">
+            <h2 class="font-headline-lg text-4xl font-bold text-on-surface mb-4">Leadership Council</h2>
+            <div class="w-24 h-1 saffron-gradient mx-auto rounded-full"></div>
+            <p class="mt-6 text-on-surface-variant max-w-2xl mx-auto">The driving force behind Chhatra Darpan Samiti, comprising dedicated student leaders committed to systemic excellence and youth empowerment.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+            <div class="gsap-reveal lg:col-span-5 flex justify-center lg:justify-end order-1">
+                <div class="relative w-full max-w-md aspect-[0.81]">
+                    <div class="absolute -inset-4 saffron-gradient opacity-20 blur-3xl rounded-full"></div>
+                    <div class="relative h-full w-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
+                        <img alt="Abhinav Tripathi (Shubh)" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzM3NEaeFtzHdu3a24txUf52-vrO-9XD9dQZmci84B3CIINpPdJTb9fnN4PBk5qeLlWxckmK6P8tPYZj5jxL9_Fc4upqLC8_dQRamKVQzU2o-5gbmtQx25iPttcwW4zKsCBq8v45ysqpTJWziS-RUPUptFduLcFNVJ97RSPDgInNUgUJ-DS2gjCvE_SNbARL9va2oatmL9mTUjconilQSUNFmQCKXy2FrbSrIlIRbB0lks8lxZmDoTJdNYnZHxmiTQamE5RBPgEXJK">
+                    </div>
+                </div>
+            </div>
+            <div class="gsap-reveal lg:col-span-7 order-2">
+                <div class="inline-block py-1 px-3 bg-primary/10 rounded-full mb-6">
+                    <span class="font-label-caps text-label-caps text-primary tracking-widest">NATIONAL PRESIDENT / राष्ट्रीय अध्यक्ष</span>
+                </div>
+                <h3 class="font-headline-lg text-3xl font-bold text-on-surface mb-2">Abhinav Tripathi (Shubh)</h3>
+                <p class="text-on-surface-variant font-body-md italic mb-8">Visionary Leader & Student Advocate</p>
+                <div class="glass-card p-8 rounded-xl border-l-4 border-primary bg-white/80">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-4">format_quote</span>
+                    <blockquote class="font-body-hindi text-lg text-on-surface leading-relaxed italic">
+                        "छात्र शक्ति राष्ट्र शक्ति का आधार है। छात्र दर्पण समिति के माध्यम से हमारा संकल्प है कि हर विद्यार्थी के अधिकारों की रक्षा हो और उन्हें नेतृत्व का सही मंच मिले। हम केवल एक संस्था नहीं, बल्कि एक विचार हैं जो छात्र राजनीति को नई दिशा देने के लिए प्रतिबद्ध है।"
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-20 gsap-reveal">
+            <h3 class="font-headline-lg text-2xl font-bold text-on-surface mb-8 px-4 border-l-4 border-primary">Regional District Coordinators</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+                <div class="bg-surface-container-low p-6 rounded-xl border border-primary/5 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">person</span>
+                    </div>
+                    <p class="font-bold text-on-surface mb-1">Shailesh Yadav</p>
+                    <p class="text-primary font-label-caps text-[10px]">MAU DISTRICT</p>
+                </div>
+                <div class="bg-surface-container-low p-6 rounded-xl border border-primary/5 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">person</span>
+                    </div>
+                    <p class="font-bold text-on-surface mb-1">Tejpratap Singh</p>
+                    <p class="text-primary font-label-caps text-[10px]">GAZIPUR DISTRICT</p>
+                </div>
+                <div class="bg-surface-container-low p-6 rounded-xl border border-primary/5 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">person</span>
+                    </div>
+                    <p class="font-bold text-on-surface mb-1">Elvish Yadav</p>
+                    <p class="text-primary font-label-caps text-[10px]">PRAYAGRAJ DISTRICT</p>
+                </div>
+                <div class="bg-surface-container-low p-6 rounded-xl border border-primary/5 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">person</span>
+                    </div>
+                    <p class="font-bold text-on-surface mb-1">Sahil Singh</p>
+                    <p class="text-primary font-label-caps text-[10px]">JAUNPUR DISTRICT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="py-section-gap px-container-padding bg-surface-container-low">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gsap-reveal">
+                <h2 class="font-headline-lg text-4xl font-bold text-primary mb-4">Get in Touch / संपर्क करें</h2>
+                <p class="max-w-2xl mx-auto text-on-surface-variant font-body-md">
+                    Have questions about our initiatives or want to collaborate? Reach out to us. We are here to listen and lead together.
+                </p>
+                <div class="h-1 w-20 bg-primary mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Info -->
+                <div class="gsap-reveal lg:col-span-5 space-y-8">
+                    <div class="glass-card p-8 rounded-xl border-t-4 border-t-primary-container bg-white/80">
+                        <h3 class="font-headline-lg text-2xl font-bold text-primary mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-xl">
+                                    <span class="material-symbols-outlined text-primary">mail</span>
+                                </div>
+                                <div>
+                                    <p class="font-label-caps text-xs text-on-surface-variant uppercase tracking-wider">Email / ईमेल</p>
+                                    <p class="font-body-md text-primary font-bold">cds.info.mail@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-xl">
+                                    <span class="material-symbols-outlined text-primary">location_on</span>
+                                </div>
+                                <div>
+                                    <p class="font-label-caps text-xs text-on-surface-variant uppercase tracking-wider">Address / पता</p>
+                                    <p class="font-body-md text-on-surface">Head Office, Lucknow, Uttar Pradesh, India</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-xl">
+                                    <span class="material-symbols-outlined text-primary">schedule</span>
+                                </div>
+                                <div>
+                                    <p class="font-label-caps text-xs text-on-surface-variant uppercase tracking-wider">Office Hours / कार्यालय समय</p>
+                                    <p class="font-body-md text-on-surface">Mon - Sat: 10:00 AM - 6:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form -->
+                <div class="gsap-reveal lg:col-span-7">
+                    <div class="glass-card p-8 lg:p-12 rounded-xl bg-white/80 h-full">
+                        <h3 class="font-headline-lg text-2xl font-bold text-on-surface mb-2">Send an Inquiry</h3>
+                        <p class="text-on-surface-variant font-body-hindi mb-10">पूछताछ फॉर्म भरें</p>
+                        <form class="space-y-6" id="contactForm" action="https://formsubmit.co/cds.info.mail@gmail.com" method="POST">
+                            <!-- Anti-spam honeypot -->
+                            <input type="text" name="_honey" style="display:none">
+                            <!-- Disable Captcha (Optional, remove if you want captcha) -->
+                            <input type="hidden" name="_captcha" value="false">
+                            <!-- Success page redirect (using current URL for now, or you can add a custom thank you page) -->
+                            <input type="hidden" name="_next" value="http://localhost:8000">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label class="font-label-caps text-xs text-on-surface-variant uppercase ml-1 block">Full Name / पूरा नाम</label>
+                                    <input class="w-full bg-surface-container-low border-transparent rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" name="name" placeholder="e.g. Rahul Sharma" required type="text">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-label-caps text-xs text-on-surface-variant uppercase ml-1 block">Email / ईमेल</label>
+                                    <input class="w-full bg-surface-container-low border-transparent rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" name="email" placeholder="rahul@example.com" required type="email">
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="font-label-caps text-xs text-on-surface-variant uppercase ml-1 block">Subject / विषय</label>
+                                <input class="w-full bg-surface-container-low border-transparent rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" name="subject" placeholder="Purpose of Inquiry" type="text">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="font-label-caps text-xs text-on-surface-variant uppercase ml-1 block">Message / संदेश</label>
+                                <textarea class="w-full bg-surface-container-low border-transparent rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" name="message" placeholder="How can we help you?" required rows="4"></textarea>
+                            </div>
+                            <button class="saffron-gradient w-full md:w-auto px-10 py-4 rounded-full text-white font-bold flex items-center justify-center gap-3 hover:scale-105 transition-transform shadow-lg shadow-primary/20" type="submit">
+                                <span>Send Message / संदेश भेजें</span>
+                                <span class="material-symbols-outlined">send</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 px-container-padding flex flex-col items-center gap-6 bg-surface-container-highest border-t border-outline-variant/30">
+        <div class="font-headline-lg text-2xl font-extrabold text-primary">
+            Chhatra Darpan Samiti
+        </div>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#">Privacy Policy</a>
+            <span class="text-on-surface-variant/30">|</span>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#">Terms of Service</a>
+            <span class="text-on-surface-variant/30">|</span>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#">Donate</a>
+        </div>
+        <div class="text-on-surface-variant opacity-80 text-center text-sm">
+            © 2024 Chhatra Darpan Samiti. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- GSAP Animations & Interactions -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero Animations (Staggered fade-in)
+            gsap.to(".gsap-hero-item", {
+                y: 0,
+                opacity: 1,
+                visibility: "visible",
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.2
+            });
+
+            gsap.to(".gsap-hero-image", {
+                scale: 1,
+                opacity: 1,
+                visibility: "visible",
+                duration: 1.5,
+                ease: "elastic.out(1, 0.7)",
+                delay: 0.8
+            });
+
+            // Parallax effect on hero background
+            gsap.to(".hero-pattern", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Scroll Reveal Animations
+            const revealElements = document.querySelectorAll(".gsap-reveal");
+            revealElements.forEach((elem) => {
+                gsap.to(elem, {
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%", // Reveal when element is 85% in view
+                        toggleActions: "play none none none"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    visibility: "visible",
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
